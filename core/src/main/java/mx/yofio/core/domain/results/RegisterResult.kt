@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RegisterResult (
     @SerializedName("code")
-    val code: Integer,
+    val code: Int,
     @SerializedName("message")
     val message: String,
     @SerializedName("id")
