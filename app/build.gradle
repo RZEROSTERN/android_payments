@@ -6,16 +6,16 @@ def archiveBuildTypes = ["release", "debug"]
 def DIST_DIRECTORY = "${buildDir}/../../dist"
 
 def secrets = rootProject.file("secrets.properties")
-def properties = new Properties()
-properties.load(new FileInputStream(secrets))
+def keysProperties = new Properties()
+keysProperties.load(new FileInputStream(secrets))
 
 android {
     signingConfigs {
         release {
             storeFile file("${buildDir}/../../keys/yofio.jks")
-            storePassword properties['storePass']
-            keyAlias properties['storeAlias']
-            keyPassword properties['keyPass']
+            storePassword keysProperties['storePass']
+            keyAlias keysProperties['storeAlias']
+            keyPassword keysProperties['keyPass']
         }
     }
     compileSdkVersion 29
@@ -34,6 +34,7 @@ android {
 
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
