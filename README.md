@@ -53,8 +53,9 @@ The release variant **must have the JKS alias and keys** for working properly, b
 - Show Payments in Dashboard
 - Make a Payment.
 
-## Opportunity Areas
+## Opportunity Areas or Pending Fixes
 
 - Unit Testing.
 - Better UX/UI for the app.
+- Some UI Validations
 - General Documentation according to JavaDOC standards.
