@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="text"
             android:importantForAutofill="no" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             android:importantForAutofill="no" />
     </com.google.android.material.textfield.TextInputLayout>
 

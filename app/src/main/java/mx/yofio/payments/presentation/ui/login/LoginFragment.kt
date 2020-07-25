@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.login_fragment, container, false)
+        val view = inflater.inflate(R.layout.login_fragment, container, false)
 
         registerButton = view.findViewById(R.id.btn_login_register)
         loginButton = view.findViewById(R.id.btn_login_submit)
@@ -44,8 +44,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        var loginRequest = LoginRequest(phoneTxt.text.toString(), passwordTxt.text.toString())
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         viewModel.dependencies = this.dependencies
@@ -64,6 +62,8 @@ class LoginFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
+            var loginRequest = LoginRequest(phoneTxt.text.toString(), passwordTxt.text.toString())
+
             viewModel.login(loginRequest)
         }
 

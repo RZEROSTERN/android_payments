@@ -30,7 +30,7 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.register_fragment, container, false)
+        val view = inflater.inflate(R.layout.register_fragment, container, false)
 
         btnRegister = view.findViewById(R.id.btn_register_submit)
         etName = view.findViewById(R.id.et_register_name)
@@ -46,9 +46,6 @@ class RegisterFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         viewModel.dependencies = this.dependencies
 
-        val registerRequest = UserRegisterRequest(etName.text.toString(), etPhone.text.toString(),
-            etEmail.text.toString(), etPassword.text.toString())
-
         viewModel.registerResult.observe(viewLifecycleOwner, Observer {
             Navigation.findNavController(requireView()).navigate(R.id.action_registerFragment_to_loginFragment)
         })
@@ -58,6 +55,9 @@ class RegisterFragment : Fragment() {
         })
 
         btnRegister.setOnClickListener {
+            val registerRequest = UserRegisterRequest(etName.text.toString(), etPhone.text.toString(),
+                etEmail.text.toString(), etPassword.text.toString())
+
             viewModel.register(registerRequest)
         }
     }
