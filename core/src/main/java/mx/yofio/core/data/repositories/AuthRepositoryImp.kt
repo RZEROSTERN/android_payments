@@ -3,7 +3,9 @@ package mx.yofio.core.data.repositories
 import io.reactivex.Observable
 import mx.yofio.core.data.network.RestApi
 import mx.yofio.core.data.network.RestApiImp
+import mx.yofio.core.domain.requests.LoginRequest
 import mx.yofio.core.domain.requests.UserRegisterRequest
+import mx.yofio.core.domain.results.LoginResult
 import mx.yofio.core.domain.results.RegisterResult
 
 class AuthRepositoryImp: AuthRepository {
@@ -13,4 +15,7 @@ class AuthRepositoryImp: AuthRepository {
         return apiRequest.register(registerRequest)
     }
 
+    override fun login(loginRequest: LoginRequest): Observable<LoginResult> {
+        return apiRequest.login(loginRequest)
+    }
 }
