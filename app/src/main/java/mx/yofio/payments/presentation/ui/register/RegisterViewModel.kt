@@ -14,13 +14,14 @@ class RegisterViewModel : ViewModel() {
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var dependencies: ApiDependencies
     var registerResult: MutableLiveData<RegisterResult> = MutableLiveData()
+    var error: MutableLiveData<String> = MutableLiveData()
 
     fun register(registerRequest: UserRegisterRequest) {
         compositeDisposable.add(dependencies.register(registerRequest)!!
             .subscribeOn(Schedulers.io())
             .subscribe(
                 {res -> registerResult.postValue(res)},
-                {t: Throwable -> Log.e(ContentValues.TAG, t.message!!) }
+                {t: Throwable -> error.postValue(t.message!!) }
             ))
     }
 }

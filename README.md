@@ -39,9 +39,12 @@ For the development of this test, I've used the following:
 
 ## Deployment
 
-- Just add water. In the dist folder you'll find a debug and release APK for testing.
+- In the dist folder you'll find a debug and release APK for testing.
 - For development, we should use Android Studio 4.0 (previous versions are not supported).
 - In case you want to use IntelliJ Idea, keep in mind you must install the Android plugin for this IDE and Android SDK **manually**. Refer to this site for further instructions https://www.mathworks.com/help/supportpkg/android/ug/install-android-sdk-platform-packages-and-sdk-tools.html
+
+### **Warning**
+The release variant **must have the JKS alias and keys** for working properly, but for security reasons it has been stablished into a **secrets.properties** file that must have been filled manually by the developer. Please email me for giving you the proper values.
 
 ## Completed Workflows
 
