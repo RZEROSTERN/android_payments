@@ -14,13 +14,14 @@ class PaymentViewModel : ViewModel() {
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var dependencies: ApiDependencies
     var paymentResult: MutableLiveData<PaymentResult> = MutableLiveData()
+    var error: MutableLiveData<String> = MutableLiveData()
 
     fun pay(token: String, paymentRequest: PaymentRequest) {
         compositeDisposable.add(dependencies.pay(token, paymentRequest)
             .subscribeOn(Schedulers.io())
             .subscribe(
                 {res -> paymentResult.postValue(res)},
-                {t: Throwable -> Log.e(ContentValues.TAG, t.message!!) }
+                {t: Throwable -> error.postValue(t.message) }
             ))
     }
 }

@@ -6,4 +6,11 @@
     <string name="copy_register">Register</string>
     <string name="copy_name">Name</string>
     <string name="copy_email">Email</string>
+    <string name="copy_cardholder">Cardholder Name</string>
+    <string name="copy_cardnumber">Cardholder Number</string>
+    <string name="copy_expiration_date">Exp. Date (MMYY)</string>
+    <string name="copy_cvc">CVC</string>
+    <string name="copy_pay">Pay!</string>
+    <string name="copy_amount">Amount</string>
+    <string name="thanks">Thanks for your payment</string>
 </resources>

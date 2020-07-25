@@ -3,6 +3,7 @@ package mx.yofio.payments.presentation.ui.dashboard.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mx.yofio.core.domain.results.MembershipPaymentsResult
 import mx.yofio.payments.R
@@ -24,8 +25,12 @@ class PaymentsAdapter(private val items: MutableList<MembershipPaymentsResult>):
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(item: MembershipPaymentsResult) {
+        var txtAmount = itemView.findViewById<TextView>(R.id.txt_payment_amount)
+        var txtId = itemView.findViewById<TextView>(R.id.txt_payment_id)
 
+        fun bind(item: MembershipPaymentsResult) {
+            txtId.text = item.id
+            txtAmount.text = "$ " + item.amount
         }
     }
 }
