@@ -1,6 +1,5 @@
 package mx.yofio.core.interactors
 
-import com.sun.org.apache.xpath.internal.operations.Bool
 import io.reactivex.Observable
 import mx.yofio.core.data.repositories.AuthRepositoryImp
 import mx.yofio.core.domain.requests.LoginRequest
@@ -15,21 +14,24 @@ class AuthInteractorImp(private val userRepositoryImp: AuthRepositoryImp): AuthI
 
     override fun register(registerRequest: UserRegisterRequest): Observable<RegisterResult>? {
         if(!validateRegister(registerRequest)) {
-            return Observable.error(Throwable("Invalid data"))
+            return Observable.error(Throwable("Invalid data. Please check your name, phone number and password."))
         }
 
         return userRepositoryImp.register(registerRequest)
-            .doOnNext { response -> logger.debug(response.toString()) }
+            .doOnNext { response -> run {
+                logger.debug(response.toString())
+            }}
             .doOnComplete { logger.debug("Service complete") }
             .onErrorReturn { error ->
                 logger.error(error.message)
-                null
+                RegisterResult(-1, error.message!!, null, null,
+                    null, null, null)
             }
     }
 
     override fun login(loginRequest: LoginRequest): Observable<LoginResult>? {
         if(!validateLogin(loginRequest)) {
-            return Observable.error(Throwable("Invalid data"))
+            return Observable.error(Throwable("Invalid data. Please check your phone number and password."))
         }
 
         return userRepositoryImp.login(loginRequest)

@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +23,10 @@ import org.koin.android.ext.android.inject
 class LoginFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
     private val dependencies: ApiDependencies by inject()
+    private lateinit var registerButton: Button
+    private lateinit var loginButton: Button
+    private lateinit var phoneTxt: EditText
+    private lateinit var passwordTxt: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +34,18 @@ class LoginFragment : Fragment() {
     ): View? {
         var view = inflater.inflate(R.layout.login_fragment, container, false)
 
+        registerButton = view.findViewById(R.id.btn_login_register)
+        loginButton = view.findViewById(R.id.btn_login_submit)
+        phoneTxt = view.findViewById(R.id.et_login_phone)
+        passwordTxt = view.findViewById(R.id.et_login_password)
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var loginRequest = LoginRequest("+525583177950", "Tests123")
+        var loginRequest = LoginRequest(phoneTxt.text.toString(), passwordTxt.text.toString())
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         viewModel.dependencies = this.dependencies
@@ -42,7 +55,17 @@ class LoginFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_dashboardFragment, bundle)
         })
 
-        viewModel.login(loginRequest)
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it!!, Toast.LENGTH_LONG).show()
+        })
+
+        registerButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        loginButton.setOnClickListener {
+            viewModel.login(loginRequest)
+        }
 
     }
 

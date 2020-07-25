@@ -36,7 +36,7 @@ class PaymentFragment : Fragment() {
 
         viewModel.pay(arguments?.getString("token")!!,
             PaymentRequest(arguments?.getString("id")!!, 100f,
-                CreditCard("4141414141414141", "1223",
+                CreditCard("4141414141414142", "1223",
                     "MARCO ANTONIO RAMIREZ SOLIS", "123")))
     }
 

@@ -33,7 +33,7 @@ class RegisterFragment : Fragment() {
             "marco.ramirez.cto@gmail.com", "Tests123")
 
         viewModel.registerResult.observe(viewLifecycleOwner, Observer {
-            Log.d("LoginFragment", it.status)
+            // Log.d("LoginFragment", it.status)
         })
 
         viewModel.register(registerRequest)

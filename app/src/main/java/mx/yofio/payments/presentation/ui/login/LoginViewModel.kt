@@ -16,6 +16,7 @@ class LoginViewModel : ViewModel() {
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var dependencies: ApiDependencies
     var loginResult: MutableLiveData<LoginResult> = MutableLiveData()
+    var error: MutableLiveData<String> = MutableLiveData()
 
 
     fun login(loginRequest: LoginRequest) {
@@ -23,7 +24,7 @@ class LoginViewModel : ViewModel() {
             .subscribeOn(Schedulers.io())
             .subscribe(
                 {res -> loginResult.postValue(res)},
-                {t: Throwable -> Log.e(ContentValues.TAG, t.message!!) }
+                {t: Throwable -> error.postValue(t.message!!) }
             ))
     }
 }
